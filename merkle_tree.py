@@ -17,6 +17,7 @@ def base(sentence: str) -> list:
 	for word in words:
 		hashed.append(h(word))
 	
+	print(hashed)
 	return hashed
 
 
@@ -31,6 +32,7 @@ def tree(root: list) -> str:
 			branch.append(h(root[i] + root[i+1]))  # hashes and adds it to the list
 
 		root = branch
+		print(root)
 
 	# returns the root as a string
 	return root[0]
@@ -61,4 +63,4 @@ def merklieze(sentence: str) -> str:
 	# passes the list to function tree() and returns the value recieved
 	return tree(hash)
 
-print(merklieze("Unbelievable..."))
+print(merklieze("I love chicken!"))
