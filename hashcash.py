@@ -16,12 +16,13 @@ def is_valid(token: str, date: str, email: str, difficulty: int) -> bool:
 		return False
 	elif elements[1] != date or elements[2] != email:
 		return False
-	elif len(elements[3]) > 16:
+	elif len(elements[3]) > 16:  # nonce in not bigger than 16 hex digits
 		return False
 
-	hash = h(token)
-	n = binary_leading_0s(hash)
+	hash = h(token)  # hash of the token
+	n = binary_leading_0s(hash)  # number of leading zeros in its binary form
 
+	# check if token satisfies difficulty
 	return False if n < difficulty else True
 
 flag = is_valid('1:satoshin@gmx.com:081031:248d07e28506851d', '081031', 'satoshin@gmx.com', 16)
@@ -29,20 +30,22 @@ print(flag)
 #print(type(flag))
 
 def mint(date: str, email: str, difficulty: int) -> str:
-	version = "1"
+	version = "1"  # default hashcash version
 
 	i = 0
 	while True:
-		a = hex(i).lstrip("0x")
+		nonce = hex(i).lstrip("0x")  # nonce in hex
 		i += 1
-		if len(a) <= 16:
-			token = version + ":" + date + ":" + email + ":" + a
-			hash = h(token)
-			n = binary_leading_0s(hash)
+		if len(nonce) <= 16:  # if nonce length <= 16
+			token = version + ":" + date + ":" + email + ":" + nonce  # constructing the token
+			hash = h(token)  # hash of the token
+			n = binary_leading_0s(hash)  # number of leading zeros in its binary form
 
+			# if satisfies difficulty
 			if n >= difficulty:
 				print(token)
 				return token
+
 		else:
 			return "Not found"
 
