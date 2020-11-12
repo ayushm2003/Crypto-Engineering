@@ -6,6 +6,7 @@ def binary_leading_0s(hex_str: str):
 	binary_representation = bin(int(hex_str, 16))[2:].zfill(256)
 	return len(binary_representation) - len(binary_representation.lstrip('0'))
 
+# token validator
 def is_valid(token: str, date: str, email: str, difficulty: int) -> bool:
 	# Splits token based on :
 	# Ideal Token format - VERSION:DATE:EMAIL:NONCE
@@ -29,6 +30,7 @@ flag = is_valid('1:satoshin@gmx.com:081031:248d07e28506851d', '081031', 'satoshi
 print(flag)
 #print(type(flag))
 
+# token minter
 def mint(date: str, email: str, difficulty: int) -> str:
 	version = "1"  # default hashcash version
 
