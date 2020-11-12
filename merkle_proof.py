@@ -1,5 +1,8 @@
 from enum import Enum
 from hashlib import sha256, sha1
+import time
+
+start_time = time.time()
 
 def h(s): return sha256(s.encode()).hexdigest() # hashing helper function
 
@@ -31,5 +34,6 @@ def validate_proof(root: str, data: str, proof: [(str, Side)]) -> bool:
 		return False
 		
 
-a = validate_proof("ac5544f3322e06322c6740a7c428c5cf9f2f33b88a023a3aad6d7199c31cbe29", "I", [('a83dd0ccbffe39d071cc317ddf6e97f5c6b1c87af91919271f9fa140b0508c6c', Side.LEFT), ('355774732410d0b5b8f8be83b7c53aa69ad645b72d2feafbbac27e22ef791c29', Side.RIGHT)])
+a = validate_proof("ac5544f3322e06322c6740a7c428c5cf9f2f33b88a023a3aad6d7199c31cbe29", "love", [('a83dd0ccbffe39d071cc317ddf6e97f5c6b1c87af91919271f9fa140b0508c6c', Side.LEFT), ('355774732410d0b5b8f8be83b7c53aa69ad645b72d2feafbbac27e22ef791c29', Side.RIGHT)])
 print(a)
+print("--- %s seconds ---" % (time.time() - start_time))
